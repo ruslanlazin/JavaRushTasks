@@ -32,6 +32,7 @@ public class Solution {
         if (date != null ? !date.equals(solution1.date) : solution1.date != null) return false;
         if (solution != null ? !solution.equals(solution1.solution) : solution1.solution != null) return false;
         if (string != null ? !string.equals(solution1.string) : solution1.string != null) return false;
+        if (solution != null ? !solution.equals(solution1.solution) : solution1.solution != null) return false;
 
         return true;
     }
@@ -43,6 +44,9 @@ public class Solution {
         result = anInt;
         temp = aDouble != +0.0d ? Double.doubleToLongBits(aDouble) : 0L;
         result = 31 * result + (int) (temp ^ (temp >>> 32));
+        long dateAsLong = date != null ? date.getTime() : 0L;
+        result = 31 * result + (int) (dateAsLong ^ (dateAsLong >>> 32));
+        result = 31 * result + (string != null ? string.hashCode() : 0);
         result = 31 * result + (solution != null ? solution.hashCode() : 0);
         return result;
     }
