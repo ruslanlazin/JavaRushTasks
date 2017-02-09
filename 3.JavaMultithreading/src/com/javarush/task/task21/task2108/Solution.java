@@ -20,7 +20,7 @@ public class Solution {
         System.out.println(clone.branches);
     }
 
-    public static class Plant{
+    public static class Plant {
         private String name;
 
         public Plant(String name) {
@@ -32,7 +32,7 @@ public class Solution {
         }
     }
 
-    public static class Tree extends Plant {
+    public static class Tree extends Plant implements Cloneable {
         private String[] branches;
 
         public Tree(String name, String[] branches) {
@@ -42,6 +42,14 @@ public class Solution {
 
         public String[] getBranches() {
             return branches;
+        }
+
+        public Tree clone() throws CloneNotSupportedException {
+            String[] clonedBranches = new String[branches.length];
+            for (int i = 0; i < branches.length; i++) {
+                clonedBranches[i] = new String(branches[i]);
+            }
+            return new Tree(this.getName(), clonedBranches);
         }
     }
 }
