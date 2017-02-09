@@ -14,10 +14,20 @@ public class Solution {
     }
 
     public static byte[] getNetAddress(byte[] ip, byte[] mask) {
-        return new byte[4];
+        if (ip.length != mask.length) throw new IllegalArgumentException();
+        byte[] result = new byte[4];
+        for (int i = 0; i < ip.length; i++) {
+            result[i] = (byte) (ip[i] & mask[i]);
+        }
+        return result;
     }
 
     public static void print(byte[] bytes) {
-
+        StringBuilder sb = new StringBuilder(35);
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(String.format("%8s", Integer.toBinaryString(bytes[i] & 0xFF)).replace(' ', '0'));
+            sb.append(" ");
+        }
+        System.out.println(sb);
     }
 }
